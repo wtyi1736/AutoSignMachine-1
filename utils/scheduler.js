@@ -91,9 +91,9 @@ let scheduler = {
           queues,
         })
       );
-      console.log("📑 任务配置文件创建完毕 等待5秒再继续");
+      console.log("📑 任务配置文件创建完毕 等待0秒再继续");
       // eslint-disable-next-line no-unused-vars
-      await new Promise((resolve, reject) => setTimeout(resolve, 5 * 1000));
+      await new Promise((resolve, reject) => setTimeout(resolve, 0 * 1000));
     } else {
       let taskJson = fs.readFileSync(scheduler.taskFile).toString("utf-8");
       taskJson = JSON.parse(taskJson);
@@ -107,9 +107,9 @@ let scheduler = {
             queues,
           })
         );
-        console.log("📑 任务配置文件更新完毕 等待5秒再继续");
+        console.log("📑 任务配置文件更新完毕 等待0秒再继续");
         // eslint-disable-next-line no-unused-vars
-        await new Promise((resolve, reject) => setTimeout(resolve, 5 * 1000));
+        await new Promise((resolve, reject) => setTimeout(resolve, 0 * 1000));
       }
 
       if (taskJson.queues.length !== Object.keys(tasks).length) {
@@ -122,9 +122,9 @@ let scheduler = {
             queues,
           })
         );
-        console.log("📑 任务配置文件更新完毕 等待5秒再继续");
+        console.log("📑 任务配置文件更新完毕 等待0秒再继续");
         // eslint-disable-next-line no-unused-vars
-        await new Promise((resolve, reject) => setTimeout(resolve, 5 * 1000));
+        await new Promise((resolve, reject) => setTimeout(resolve, 0 * 1000));
       }
     }
     scheduler.today = today;
@@ -159,9 +159,9 @@ let scheduler = {
     let taskJson = {};
     if (fs.existsSync(scheduler.taskFile)) {
       taskJson = fs.readFileSync(scheduler.taskFile).toString("utf-8");
-      console.log("📑 任务配置文件读取完毕 等待5秒再继续");
+      console.log("📑 任务配置文件读取完毕 等待0秒再继续");
       // eslint-disable-next-line no-unused-vars
-      await new Promise((resolve, reject) => setTimeout(resolve, 5 * 1000));
+      await new Promise((resolve, reject) => setTimeout(resolve, 0 * 1000));
       taskJson = JSON.parse(taskJson);
       if (taskJson.today === scheduler.today) {
         queues = taskJson.queues;
@@ -204,7 +204,7 @@ let scheduler = {
     }
     console.log(
       "将使用",
-      scheduler.taskKey.replaceWithMask(2, 3),
+      scheduler.taskKey.replaceWithMask(1,2,3,4),
       "作为账户识别码"
     );
     console.log("🤨 计算可执行任务...");
@@ -287,8 +287,8 @@ let scheduler = {
       }
 
       // 任务执行
-      let queue = new PQueue({ concurrency: 2 });
-      console.log("👉 调度任务中", "并发数", 2);
+      let queue = new PQueue({ concurrency: 150 });
+      console.log("👉 调度任务中", "并发数", 150);
       for (let task of will_tasks) {
         queue.add(async () => {
           try {
@@ -347,10 +347,10 @@ let scheduler = {
                 };
               }
               fs.writeFileSync(scheduler.taskFile, JSON.stringify(taskJson));
-              console.log("📑 任务配置文件更新完毕 等待5秒再继续");
+              console.log("📑 任务配置文件更新完毕 等待0秒再继续");
               // eslint-disable-next-line no-unused-vars
               await new Promise((resolve, reject) =>
-                setTimeout(resolve, 5 * 1000)
+                setTimeout(resolve, 0 * 1000)
               );
             }
           } catch (err) {
