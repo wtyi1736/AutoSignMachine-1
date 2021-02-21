@@ -97,8 +97,8 @@ var gameYearBox = {
                 console.log('领取宝箱中，尝试达成宝箱条件')
                 let producGame = require('./producGame')
                 let { games, jar } = await gameYearBox.games(axios, options)
-                let queue = new PQueue({ concurrency: 2 });
-                console.log('调度任务中', '并发数', 2)
+                let queue = new PQueue({ concurrency: 30 });
+                console.log('调度任务中', '并发数', 30)
                 let n = Math.floor((box.duration - parseInt(boxinfo.total_duration_num)) / 6) + 1
                 console.log('预计再游玩', n * 6, '分钟')
                 for (let game of games) {
